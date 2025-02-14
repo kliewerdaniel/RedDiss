@@ -19,25 +19,25 @@ A **Streamlit** app that crafts diss tracks from Reddit posts using AI-powered t
 ```bash
 git clone https://github.com/kliewerdaniel/RedDiss.git
 cd RedDiss
-
+```
 2. Install Dependencies
-
+```bash
 pip install -r requirements.txt
-
+```
 3. Set Up Environment Variables
 
 Create a .env file in the root directory and add your Reddit API credentials:
-
+```bash
 REDDIT_CLIENT_ID=your_client_id
 REDDIT_CLIENT_SECRET=your_client_secret
 REDDIT_USER_AGENT=your_user_agent
-
+```
 Usage
 
 1. Run the Streamlit App
-
+```bash
 streamlit run streamlit_app.py
-
+```
 2. Generate a Diss Track
 	•	Enter a Reddit post URL in the input field.
 	•	Click “Generate Diss Track” to process the text and create lyrics.
