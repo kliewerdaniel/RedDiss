@@ -8,7 +8,7 @@ class FlowRefiner:
         # Using ollama with litellm
         self.model = "ollama/llama3.3:latest"
     
-    async def refine_flow(self, lyrics: Dict[str, Any]) -> Dict[str, Any]:
+    async def refine_flow(self, lyrics: Dict[str, Any], flow_complexity: int) -> Dict[str, Any]:
         """
         Enhance flow and punchlines in generated lyrics
         
@@ -22,7 +22,7 @@ class FlowRefiner:
         
         # Refine each section
         for section, content in lyrics.items():
-            refined_lyrics[section] = await self._enhance_section(content, section)
+            refined_lyrics[section] = await self._enhance_section(content, section, flow_complexity)
         
         # Save refined lyrics
         Path("data/refined").mkdir(parents=True, exist_ok=True)
@@ -31,7 +31,7 @@ class FlowRefiner:
         
         return refined_lyrics
     
-    async def _enhance_section(self, content: str, section_type: str) -> str:
+    async def _enhance_section(self, content: str, section_type: str, flow_complexity: int) -> str:
         """Enhance a specific section of lyrics"""
         if not content:
             return ""
@@ -103,9 +103,9 @@ Provide ONLY the enhanced lyrics without any tags, directions, or explanations. 
 # Initialize global refiner
 _refiner = None
 
-async def refine_flow(lyrics: Dict[str, Any]) -> Dict[str, Any]:
+async def refine_flow(lyrics: Dict[str, Any], flow_complexity: int) -> Dict[str, Any]:
     """Main function to refine lyrics flow"""
     global _refiner
     if _refiner is None:
         _refiner = FlowRefiner()
-    return await _refiner.refine_flow(lyrics)
+    return await _refiner.refine_flow(lyrics, flow_complexity)

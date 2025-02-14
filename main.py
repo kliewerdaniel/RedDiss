@@ -33,12 +33,13 @@ async def root():
     return {"message": "Diss Track AI Generator API"}
 
 @app.get("/generate_diss")
-async def generate_diss(url: str, beat_url: Optional[str] = None):
+async def generate_diss(url: str, style: str, beat_url: Optional[str] = None, flow_complexity: int = 5):
     """
     Generate a diss track from a Reddit post/comment
     
     Args:
         url (str): Reddit post/comment URL
+        style (str): The style of the diss track (e.g., Aggressive, Playful, Sarcastic)
         beat_url (Optional[str]): URL to a beat file (optional)
     
     Returns:
@@ -55,10 +56,10 @@ async def generate_diss(url: str, beat_url: Optional[str] = None):
         themes = await theme_extractor.extract_themes(cleaned_text)
         
         # 4. Generate lyrics
-        lyrics = await lyrics_generator.generate_lyrics(themes)
-        
+        lyrics = await lyrics_generator.generate_lyrics(themes, style)
+
         # 5. Refine flow and punchlines
-        refined_lyrics = await flow_refiner.refine_flow(lyrics)
+        refined_lyrics = await flow_refiner.refine_flow(lyrics, flow_complexity)
         
         # 6. Convert to speech
         speech_file = await tts_engine.text_to_speech(refined_lyrics)
@@ -90,23 +91,24 @@ async def generate_diss(url: str, beat_url: Optional[str] = None):
         }
         
         # Determine which step failed
-        if "asyncpraw" in str(e).lower() or "reddit" in str(e).lower():
+        error_lower = str(e).lower()
+        if "asyncpraw" in error_lower or "reddit" in error_lower:
             error_detail["step"] = "reddit_scraping"
-        elif "sanitizer" in str(e).lower():
+        elif "sanitizer" in error_lower:
             error_detail["step"] = "text_cleaning"
-        elif "theme" in str(e).lower():
+        elif "theme" in error_lower:
             error_detail["step"] = "theme_extraction"
-        elif "lyrics" in str(e).lower():
+        elif "lyrics" in error_lower:
             error_detail["step"] = "lyrics_generation"
-        elif "flow" in str(e).lower():
+        elif "flow" in error_lower:
             error_detail["step"] = "flow_refinement"
-        elif "speech" in str(e).lower() or "tts" in str(e).lower():
+        elif "speech" in error_lower or "tts" in error_lower:
             error_detail["step"] = "text_to_speech"
-        elif "beat" in str(e).lower() or "sync" in str(e).lower():
+        elif "beat" in error_lower or "sync" in error_lower:
             error_detail["step"] = "beat_syncing"
-        elif "master" in str(e).lower() or "audio" in str(e).lower():
+        elif "master" in error_lower or "audio" in error_lower:
             error_detail["step"] = "audio_mastering"
-            
+                
         print("Error details:", error_detail)  # Log error details
         raise HTTPException(status_code=500, detail=error_detail)
 

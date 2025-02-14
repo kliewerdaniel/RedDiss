@@ -67,9 +67,9 @@ def _clean_string(text: str) -> str:
     # Remove URLs
     text = re.sub(r'http\S+|www\S+|https\S+', '', text, flags=re.MULTILINE)
     
-    # Remove Reddit-style formatting
+    # Remove Reddit-style formatting and HTML entities
     text = re.sub(r'\[.*?\]|\(.*?\)', '', text)
-    text = re.sub(r'&amp;|&lt;|&gt;', '', text)
+    text = re.sub(r'&(?:amp|lt|gt|#\d+|[a-zA-Z]+);', ' ', text)
     
     # Remove special characters but keep punctuation
     text = re.sub(r'[^a-z0-9\s.,!?\'"-]', '', text)
