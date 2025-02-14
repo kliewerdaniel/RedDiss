@@ -1,20 +1,22 @@
-RedDiss: AI-Powered Diss Track Generator
 
-A Streamlit app that crafts diss tracks from Reddit posts using AI-powered text analysis, lyrics generation, and text-to-speech synthesis.
+# ![RedDiss](ss.png)  
+# **RedDiss: AI-Powered Diss Track Generator**  
 
-Features
-	•	Reddit Integration: Scrapes posts and comments from Reddit for analysis.
-	•	Natural Language Processing (NLP): Extracts themes and sentiments from the text.
-	•	Lyrics Generation: Uses Llama 3.3 to generate diss track lyrics.
-	•	Flow & Punchline Enhancement: Refines lyrics for impactful delivery.
-	•	Text-to-Speech (TTS): Converts lyrics into vocal audio using Bark TTS.
-	•	Beat Synchronization: Aligns vocals with beats using Librosa.
-	•	Audio Mastering: Applies final processing for a polished diss track.
+A **Streamlit** app that crafts diss tracks from Reddit posts using AI-powered text analysis, lyrics generation, and text-to-speech synthesis.  
 
-Installation & Setup
+## **Features**  
+- **Reddit Integration:** Scrapes posts and comments from Reddit for analysis.  
+- **Natural Language Processing (NLP):** Extracts themes and sentiments from the text.  
+- **Lyrics Generation:** Uses **Llama 3.3** to generate diss track lyrics.  
+- **Flow & Punchline Enhancement:** Refines lyrics for impactful delivery.  
+- **Text-to-Speech (TTS):** Converts lyrics into vocal audio using **Bark TTS**.  
+- **Beat Synchronization:** Aligns vocals with beats using **Librosa**.  
+- **Audio Mastering:** Applies final processing for a polished diss track.  
 
-1. Clone the Repository
+## **Installation & Setup**  
 
+### **1. Clone the Repository**  
+```bash
 git clone https://github.com/kliewerdaniel/RedDiss.git
 cd RedDiss
 
