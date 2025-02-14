@@ -1,5 +1,3 @@
-Got it! Here’s the Streamlit version with Llama 3.3 instead of DeepSeek and without SmolAgents:
-
 RedDiss: AI-Powered Diss Track Generator
 
 A Streamlit app that crafts diss tracks from Reddit posts using AI-powered text analysis, lyrics generation, and text-to-speech synthesis.
